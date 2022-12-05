@@ -1,5 +1,6 @@
 # stonatm@gmail.com
-# TM1650 4 digit 7 segment led display
+# Gravity DFRobot DFR0645-R DFR0645-G
+# TM1650 4 digit 8 segment led display
 # i2c software implementation
 # esp32 micropython driver
 
