@@ -43,11 +43,10 @@ function display_integer(num)
 
 parameters:
 
-**num** - integer number to display from range [-999,9999]. If number is out of range display shows **Err**.
-Displayed number is always alligned to left side of display. 
+**num** - integer number to display from range [-999,9999].
 
 
-Display float number.
+Display float number.  If number is out of range display shows **Err**. Displayed number is always alligned to left side of display.
 ```
 function display_float(num)
 ```
@@ -57,7 +56,7 @@ parameters:
 **num** - float number to display from range [-999.0,9999.0]
 
 
-First is displayed sign (if exists) integer part of number, decimal point (always displayed) and the fractional part.
+First is displayed sign (if exists), integer part of number, decimal point (always displayed) and the fractional part.
 So if integer part of number has 4 digit including sign then fractional part won't be displayed
 
 Example:
