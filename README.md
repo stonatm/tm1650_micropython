@@ -6,9 +6,10 @@ Software I2C micropython implementation driver for 4 digit 8 segment LED display
 source file: [tm1650.py](./tm1650.py)
 
 
-Initialize display.
+### Initialise display
+
 ```
-import tm1650
+from tm1650 import TM1650
 disp = TM1650(sda_pin, scl_pin)
 ```
 parameters:
@@ -18,25 +19,27 @@ parameters:
 **scl_pin** - esp32 pin number where display SDA pin is connected.
 
 
-Turn on display.
+### Turn on display
+
 ```
 function display_on()
 ```
 
+### Turn off display
 
-Turn off display.
 ```
 function display_off()
 ```
 
+### Clear display
 
-Clear display.
 ```
 function display_clear()
 ```
 
+### Display integer
 
-Display integer number with right allign on display (without trailing zeroes). If number is out of range display shows **Err**.
+Display integer number with right align on display (without trailing zeroes). If number is out of range display shows **Err**.
 ```
 function display_integer(num)
 ```
@@ -46,7 +49,9 @@ parameters:
 **num** - integer number to display from range [-999,9999].
 
 
-Display float number.  If number is out of range display shows **Err**. Displayed number is always alligned to left side of display.
+### Display float
+
+Display float number.  If number is out of range display shows **Err**. Displayed number is always aligned to left side of display.
 ```
 function display_float(num)
 ```
@@ -70,8 +75,17 @@ Example:
 | -23.45     | -23.4   |
 | -999.123   | -999.   |
 
+### Display string
 
-### Example:
+```
+function display_string(s)
+```
+
+Display the first four characters of `s`.
+
+Only certain characters can be displayed. If a character is not recognised it will display as "-". Add your own in `SEGMENT_MAP`.
+
+## Example
 
 ```
 from tm1650 import TM1650
