@@ -82,6 +82,15 @@ disp = TM1650(SDA_PIN, SCL_PIN)
 
 disp.display_on()
 
+def scroll_string(s):
+  s = s.upper()
+  doublemsg = s + s
+  for i in range(len(s) - 3):
+    disp.display_string(doublemsg[i:4+i])
+    sleep(0.5)
+
+scroll_string("Hello Python")
+
 for i in range(10000):
   disp.display_integer(i)
 

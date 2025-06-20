@@ -26,11 +26,21 @@ SEGMENT_MAP = {
   'D': 94,   # 0x5E
   'E': 121,  # 0x79
   'F': 113,  # 0x71
+  'G': 111,  # 0x6F
   'H': 118,  # 0x76
+  'I': 6,    # 0x06
+  'J': 14,   # 0x0E
   'L': 56,   # 0x38
+  'N': 84,   # 0x54
   'O': 63,   # 0x3F
   'P': 115,  # 0x73
-  'U': 62    # 0x3E
+  'Q': 103,  # 0x67
+  'R': 80,   # 0x50
+  'S': 109,  # 0x6D
+  'T': 120,  # 0x78
+  'U': 62,   # 0x3E
+  'Y': 110,  # 0x6E
+  'Z': 91,   # 0x5B
 }
 
 class TM1650():
@@ -144,6 +154,13 @@ class TM1650():
     char = char.upper()
     code = SEGMENT_MAP[char] if char in SEGMENT_MAP else SEGMENT_MAP["-"]
     self.__set_raw_value(index, code)
+    self.__send_buf()
+
+  def display_string(self, s):
+    s = s.upper()
+    for i in range(min(4, len(s))):
+      code = SEGMENT_MAP[s[i]] if s[i] in SEGMENT_MAP else SEGMENT_MAP["-"]
+      self.__set_raw_value(i, code)
     self.__send_buf()
 
   def display_clear(self):
