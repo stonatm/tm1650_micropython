@@ -86,5 +86,5 @@ for i in range(10000):
   disp.display_integer(i)
 
 disp.display_clear()
-disp.off()
+disp.display_off()
 ```
