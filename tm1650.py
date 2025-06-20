@@ -153,12 +153,6 @@ class TM1650():
         self.__set_dp(dot_pos-1)      
     self.__send_buf()
 
-  def display_letter(self, index, char):
-    char = char.upper()
-    code = SEGMENT_MAP[char] if char in SEGMENT_MAP else SEGMENT_MAP["-"]
-    self.__set_raw_value(index, code)
-    self.__send_buf()
-
   def display_string(self, s):
     s = s.upper()
     for i in range(min(4, len(s))):
