@@ -6,6 +6,33 @@
 
 from machine import Pin, SoftI2C
 
+SEGMENT_MAP = {
+  ' ': 0,    # 0x00
+  '-': 64,   # 0x40
+  '_': 8,    # 0x08
+  '0': 63,   # 0x3F
+  '1': 6,    # 0x06
+  '2': 91,   # 0x5B
+  '3': 79,   # 0x4F
+  '4': 102,  # 0x66
+  '5': 109,  # 0x6D
+  '6': 125,  # 0x7D
+  '7': 7,    # 0x07
+  '8': 127,  # 0x7F
+  '9': 111,  # 0x6F
+  'A': 119,  # 0x77
+  'B': 124,  # 0x7C
+  'C': 88,   # 0x58
+  'D': 94,   # 0x5E
+  'E': 121,  # 0x79
+  'F': 113,  # 0x71
+  'H': 118,  # 0x76
+  'L': 56,   # 0x38
+  'O': 63,   # 0x3F
+  'P': 115,  # 0x73
+  'U': 62    # 0x3E
+}
+
 class TM1650():
 
   def __init__(self, sda_pin, scl_pin):
@@ -30,7 +57,7 @@ class TM1650():
     self.dbuf[pos%4] = self.tbuf[0]
 
   def __digit(self,num):
-    dig= [63, 6, 91, 79, 102, 109, 124, 7, 127, 103]
+    dig = [63, 6, 91, 79, 102, 109, 125, 7, 127, 111]
     return(dig[num%10])
 
   def __set_digit(self, pos, value):
@@ -111,6 +138,12 @@ class TM1650():
       for i in range(4):
         self.__set_digit(i, int(out[i]))
         self.__set_dp(dot_pos-1)      
+    self.__send_buf()
+
+  def display_letter(self, index, char):
+    char = char.upper()
+    code = SEGMENT_MAP[char] if char in SEGMENT_MAP else SEGMENT_MAP["-"]
+    self.__set_raw_value(index, code)
     self.__send_buf()
 
   def display_clear(self):

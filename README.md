@@ -74,11 +74,13 @@ Example:
 ### Example:
 
 ```
-import tm1650
+from tm1650 import TM1650
 
+SDA_PIN = 0
+SCL_PIN = 1
 disp = TM1650(SDA_PIN, SCL_PIN)
 
-disp.on()
+disp.display_on()
 
 for i in range(10000):
   disp.display_integer(i)
