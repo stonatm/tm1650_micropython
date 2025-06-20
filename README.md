@@ -1,5 +1,5 @@
 # Gravity DFRobot DFR0645-G DFR0645-R TM1650
-Software I2C micropython implementation driver for 4 digit 8 segment LED display for ESP32.
+Software I2C micropython implementation driver for 4 digit 8 segment LED display for Micropython devices such as ESP32 or Raspberry Pi.
 
 ## tm1650 library
 
