@@ -1,14 +1,15 @@
 # Gravity DFRobot DFR0645-G DFR0645-R TM1650
-Software I2C micropython implementation driver for 4 digit 8 segment LED display for ESP32.
+Software I2C micropython implementation driver for 4 digit 8 segment LED display for Micropython devices such as ESP32 or Raspberry Pi.
 
 ## tm1650 library
 
 source file: [tm1650.py](./tm1650.py)
 
 
-Initialize display.
+### Initialise display
+
 ```
-import tm1650
+from tm1650 import TM1650
 disp = TM1650(sda_pin, scl_pin)
 ```
 parameters:
@@ -18,25 +19,27 @@ parameters:
 **scl_pin** - esp32 pin number where display SDA pin is connected.
 
 
-Turn on display.
+### Turn on display
+
 ```
 function display_on()
 ```
 
+### Turn off display
 
-Turn off display.
 ```
 function display_off()
 ```
 
+### Clear display
 
-Clear display.
 ```
 function display_clear()
 ```
 
+### Display integer
 
-Display integer number with right allign on display (without trailing zeroes). If number is out of range display shows **Err**.
+Display integer number with right align on display (without trailing zeroes). If number is out of range display shows **Err**.
 ```
 function display_integer(num)
 ```
@@ -46,7 +49,9 @@ parameters:
 **num** - integer number to display from range [-999,9999].
 
 
-Display float number.  If number is out of range display shows **Err**. Displayed number is always alligned to left side of display.
+### Display float
+
+Display float number.  If number is out of range display shows **Err**. Displayed number is always aligned to left side of display.
 ```
 function display_float(num)
 ```
@@ -70,19 +75,39 @@ Example:
 | -23.45     | -23.4   |
 | -999.123   | -999.   |
 
-
-### Example:
+### Display string
 
 ```
-import tm1650
+function display_string(s)
+```
 
+Display the first four characters of `s`.
+
+Only certain characters can be displayed. If a character is not recognised it will display as "-". Add your own in `SEGMENT_MAP`.
+
+## Example
+
+```
+from tm1650 import TM1650
+
+SDA_PIN = 0
+SCL_PIN = 1
 disp = TM1650(SDA_PIN, SCL_PIN)
 
-disp.on()
+disp.display_on()
+
+def scroll_string(s):
+  s = s.upper()
+  doublemsg = s + s
+  for i in range(len(s) - 3):
+    disp.display_string(doublemsg[i:4+i])
+    sleep(0.5)
+
+scroll_string("Hello Python")
 
 for i in range(10000):
   disp.display_integer(i)
 
 disp.display_clear()
-disp.off()
+disp.display_off()
 ```
